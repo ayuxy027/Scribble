@@ -66,9 +66,25 @@ const LobbyPage: React.FC = () => {
               <div className="text-lg font-black mb-4 relative">
                 Host
                 <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
-                  <svg width="100%" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z" fill="#E5E7EB" />
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="100%"
+                    height="8"
+                    viewBox="0 0 100 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z"
+                      fill="#E5E7EB"
+                    />
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0"
+                      stroke="black"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -88,9 +104,25 @@ const LobbyPage: React.FC = () => {
               <div className="text-lg font-black px-5 py-4 flex-shrink-0 bg-white sticky top-0 z-10">
                 Players
                 <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
-                  <svg width="100%" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z" fill="#E5E7EB" />
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="100%"
+                    height="8"
+                    viewBox="0 0 100 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z"
+                      fill="#E5E7EB"
+                    />
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0"
+                      stroke="black"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -107,9 +139,25 @@ const LobbyPage: React.FC = () => {
               <div className="text-lg font-black mb-4 relative">
                 Room
                 <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
-                  <svg width="100%" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z" fill="#E5E7EB" />
-                    <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="100%"
+                    height="8"
+                    viewBox="0 0 100 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z"
+                      fill="#E5E7EB"
+                    />
+                    <path
+                      d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0"
+                      stroke="black"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -154,9 +202,25 @@ const LobbyPage: React.FC = () => {
                 <div className="text-lg font-black mb-4 relative">
                   Status
                   <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
-                    <svg width="100%" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                      <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z" fill="#E5E7EB" />
-                      <path d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg
+                      width="100%"
+                      height="8"
+                      viewBox="0 0 100 8"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0V8H0V3Z"
+                        fill="#E5E7EB"
+                      />
+                      <path
+                        d="M0 3C8.33333 1.66667 16.6667 1 25 1C33.3333 1 41.6667 2.33333 50 5C58.3333 7.66667 66.6667 8.33333 75 7C83.3333 5.66667 91.6667 3.33333 100 0"
+                        stroke="black"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
                 </div>
