@@ -1,7 +1,8 @@
-const App = () => {
-  return (
-    <div className="text-3xl font-bold underline">App</div>
-  )
-}
+import React from 'react';
+import LandingPage from './pages/LandingPage';
 
-export default App
+const App: React.FC = () => {
+  return <LandingPage />;
+};
+
+export default App;
