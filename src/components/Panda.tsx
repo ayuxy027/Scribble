@@ -8,7 +8,7 @@ const Panda: React.FC<PandaProps> = ({ size = 'md' }) => {
     // Define sizes
     const sizeClasses = {
         sm: 'w-12 h-12',
-        md: 'w-16 h-16',
+        md: 'w-16 h-17',
         lg: 'w-20 h-20'
     };
     
@@ -25,7 +25,7 @@ const Panda: React.FC<PandaProps> = ({ size = 'md' }) => {
     };
 
     return (
-        <div className={`${sizeClasses[size]} bg-white border-2 border-black rounded-3xl relative`}>
+        <div className={`${sizeClasses[size]} bg-white border-4 border-black rounded-3xl relative`}>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className={`${eyeSize[size]} bg-black rounded-full`}></div>
                 <div className={`${eyeSize[size]} bg-black rounded-full absolute top-0 left-3`}></div>

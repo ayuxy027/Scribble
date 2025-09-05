@@ -16,7 +16,7 @@ const Hero = () => {
                             <span className="inline-block w-16 h-16 md:w-20 md:h-20 -mx-0 align-middle">
                                 <Panda size="md" />
                             </span>
-                            <span className="inline-block w-16 h-16 md:w-20 md:h-20 -mx-4 align-middle">
+                            <span className="inline-block w-16 h-16 md:w-20 md:h-20 -mx-2 align-middle" style={{ transform: 'rotate(30deg)' }}>
                                 <Panda size="md" />
                             </span>
                             <span>DLE</span>
