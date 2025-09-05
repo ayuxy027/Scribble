@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
     return (
@@ -12,41 +13,44 @@ const Footer: React.FC = () => {
                         <p className="text-gray-300 mb-4">
                             The ultimate doodle art community for creative minds.
                         </p>
+                        <p className="text-xs text-gray-400 mt-2">
+                            Built on Stacks Hacker House Goa 2025 by Team 404 Found.
+                        </p>
                     </div>
-                    
+
                     <div className="md:col-span-1">
                         <h3 className="text-xl font-bold mb-4">EXPLORE</h3>
                         <ul className="space-y-2">
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Gallery</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Artists</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Challenges</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Tutorials</a></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Gallery</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Artists</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Challenges</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Tutorials</Link></li>
                         </ul>
                     </div>
-                    
+
                     <div className="md:col-span-1">
                         <h3 className="text-xl font-bold mb-4">COMMUNITY</h3>
                         <ul className="space-y-2">
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Forums</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Events</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Support</a></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Forums</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Events</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Blog</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Support</Link></li>
                         </ul>
                     </div>
-                    
+
                     <div className="md:col-span-1">
                         <h3 className="text-xl font-bold mb-4">CONNECT</h3>
                         <ul className="space-y-2">
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Twitter</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Instagram</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Discord</a></li>
-                            <li><a href="#" className="text-gray-300 hover:text-white transition-colors">YouTube</a></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Twitter</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Instagram</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Discord</Link></li>
+                            <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">YouTube</Link></li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                    <p>© 2023 FRA! Doodle Community. All rights reserved.</p>
+                    <p>© 2025 FRA! Doodle Community. All rights reserved.</p>
                 </div>
             </div>
         </footer>
