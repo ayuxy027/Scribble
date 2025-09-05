@@ -29,7 +29,7 @@ const LobbyPage: React.FC = () => {
   )
 
   return (
-    <div className="h-screen bg-[#fffdf6] relative overflow-hidden">
+    <div className="h-screen bg-[#f5f3ea] relative overflow-hidden">
       <Navigation />
 
       {/* Decorative Elements */}
@@ -42,11 +42,11 @@ const LobbyPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute right-[15%] top-[25%] w-16 h-12 bg-yellow-200 border-2 border-black rounded-full -rotate-6 z-10"></div>
+      <div className="absolute right-[15%] top-[25%] w-16 h-12 bg-gray-200 border-2 border-black rounded-full -rotate-6 z-10"></div>
 
-      <div className="absolute left-[25%] bottom-[15%] w-12 h-12 bg-pink-200 border-2 border-black rounded-full rotate-12 z-10"></div>
+      <div className="absolute left-[25%] bottom-[15%] w-12 h-12 bg-pink-100 border-2 border-black rounded-full rotate-12 z-10"></div>
 
-      <div className="absolute right-[20%] bottom-[20%] w-20 h-14 bg-blue-200 border-2 border-black rounded-full -rotate-12 z-10"></div>
+      <div className="absolute right-[20%] bottom-[20%] w-20 h-14 bg-blue-100 border-2 border-black rounded-full -rotate-12 z-10"></div>
 
       {/* Content */}
       <div className="flex flex-col items-center h-screen px-6 md:px-10 relative z-20 pt-16 pb-6">
@@ -92,7 +92,7 @@ const LobbyPage: React.FC = () => {
                 <Avatar name={hostName} size={64} />
                 <div>
                   <div className="font-bold text-xl">{hostName}</div>
-                  <div className="text-xs uppercase font-black bg-yellow-200 border-2 border-black rounded-full inline-block px-3 py-0.5 mt-1">
+                  <div className="text-xs uppercase font-black bg-gray-200 border-2 border-black rounded-full inline-block px-3 py-0.5 mt-1">
                     Owner
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const LobbyPage: React.FC = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <button
-                  className="border-2 border-black rounded-full px-4 py-2 font-bold bg-white hover:bg-yellow-100 active:translate-y-[1px] w-full flex items-center justify-center gap-2"
+                  className="border-2 border-black rounded-full px-4 py-2 font-bold bg-white hover:bg-gray-100 active:translate-y-[1px] w-full flex items-center justify-center gap-2"
                   onClick={() => navigator.clipboard?.writeText(roomName)}
                 >
                   <svg
@@ -181,7 +181,7 @@ const LobbyPage: React.FC = () => {
                   </svg>
                   Copy Room Code
                 </button>
-                <button className="border-2 border-black rounded-full px-4 py-2 font-bold bg-white hover:bg-yellow-100 active:translate-y-[1px] w-full flex items-center justify-center gap-2">
+                <button className="border-2 border-black rounded-full px-4 py-2 font-bold bg-white hover:bg-gray-100 active:translate-y-[1px] w-full flex items-center justify-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -228,7 +228,7 @@ const LobbyPage: React.FC = () => {
               </div>
               <button
                 className={`mt-4 border-2 border-black rounded-full px-6 py-3 font-bold text-xl uppercase tracking-wide transition-colors ${
-                  meReady ? "bg-green-300" : "bg-yellow-200"
+                  meReady ? "bg-green-300" : "bg-gray-300"
                 } hover:brightness-95 active:translate-y-[1px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}
                 onClick={() => setMeReady((v) => !v)}
               >
