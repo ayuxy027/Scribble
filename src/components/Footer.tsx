@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="md:col-span-1">
                         <div className="bg-white text-black px-4 py-2 rounded-full inline-block mb-4">
-                            <div className="text-2xl font-bold">FRA!</div>
+                            <div className="text-2xl font-bold">STAKEBOARD</div>
                         </div>
                         <p className="text-gray-300 mb-4">
                             The ultimate web3 doodle battle arena where creativity meets crypto rewards.
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                    <p>© 2025 FRA! Web3 Doodle Battle Arena. All rights reserved.</p>
+                    <p>© 2025 StakeBoard - Web3 Doodle Battle Arena. All rights reserved.</p>
                 </div>
             </div>
         </footer>

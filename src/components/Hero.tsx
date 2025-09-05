@@ -1,6 +1,7 @@
 import BannerPng from '../assets/banner.png';
 import CTAPng from '../assets/cta.png';
 import Panda from './Panda';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
@@ -50,7 +51,7 @@ const Hero = () => {
                             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black leading-none mb-8">
                                 <div className="block">READY TO DOMINATE THE</div>
                                 <div className="block my-4">
-                                    <span className="text-5xl md:text-7xl lg:text-8xl">LEADERBOARD?</span>
+                                    <span className="text-5xl md:text-7xl lg:text-8xl">STAKEBOARD?</span>
                                     <span className="inline-block w-12 h-12 md:w-16 md:h-16 -mx-1 align-middle">
                                         <Panda size="md" />
                                     </span>
@@ -75,18 +76,18 @@ const Hero = () => {
 
                             {/* Buttons */}
                             <div className="flex flex-col sm:flex-row gap-6">
-                                <button className="bg-black text-white px-10 py-5 rounded-full text-xl font-black hover:bg-gray-800 transition-colors relative">
+                                <Link to="/lobby" className="bg-black text-white px-10 py-5 rounded-full text-xl font-black hover:bg-gray-800 transition-colors relative inline-block text-center">
                                     <span>LOBBY</span>
                                     <span className="absolute -top-2 -right-2 w-6 h-6">
                                         <Panda size="sm" />
                                     </span>
-                                </button>
-                                <button className="border-2 border-black px-10 py-5 rounded-full text-xl font-black hover:bg-black hover:text-white transition-colors relative">
+                                </Link>
+                                <Link to="/lobby" className="border-2 border-black px-10 py-5 rounded-full text-xl font-black hover:bg-black hover:text-white transition-colors relative inline-block text-center">
                                     <span>CONNECT WALLET</span>
                                     <span className="absolute -top-2 -right-2 w-6 h-6" style={{ transform: 'rotate(45deg)' }}>
                                         <Panda size="sm" />
                                     </span>
-                                </button>
+                                </Link>
                             </div>
                         </div>
 
