@@ -28,7 +28,7 @@ const Hero = () => {
 
             {/* Bottom section - Hero Banner */}
             <div className="absolute bottom-0 left-0 right-0 bg-white z-10">
-                <div className="h-[400px] flex items-end justify-center">
+                <div className="h-[450px] flex items-end justify-center">
                     <img
                         src={BannerPng}
                         alt="Hero Banner with doodle characters"
