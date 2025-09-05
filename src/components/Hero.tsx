@@ -9,17 +9,19 @@ const Hero = () => {
 
                 {/* Main welcome text */}
                 <div className="text-center max-w-4xl">
-                    <h1 className="text-6xl md:text-8xl font-black leading-tight relative">
-                        <span>BENVENUT* NELLA D</span>
-                        {/* First O replaced with panda */}
-                        <span className="inline-block w-16 h-16 md:w-20 md:h-20 relative -mx-0.5">
-                            <Panda size="md" />
-                        </span>
-                        {/* Second O replaced with panda */}
-                        <span className="inline-block w-16 h-16 md:w-20 md:h-20 relative -mx-0.5">
-                            <Panda size="md" />
-                        </span>
-                        <span>DLE ART DI FRA!</span>
+                    <h1 className="text-6xl md:text-8xl font-black leading-none">
+                        <div className="block">BENVENUT* NELLA</div>
+                        <div className="block my-4">
+                            <span>D</span>
+                            <span className="inline-block w-16 h-16 md:w-20 md:h-20 -mx-0 align-middle">
+                                <Panda size="md" />
+                            </span>
+                            <span className="inline-block w-16 h-16 md:w-20 md:h-20 -mx-4 align-middle">
+                                <Panda size="md" />
+                            </span>
+                            <span>DLE</span>
+                        </div>
+                        <div className="block">ART DI FRA!</div>
                     </h1>
                 </div>
             </div>
