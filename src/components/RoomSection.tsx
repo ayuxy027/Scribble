@@ -7,7 +7,10 @@ type RoomSectionProps = {
 
 type RoomMode = "selection" | "create" | "join" | "active"
 
-const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) => {
+const RoomSection: React.FC<RoomSectionProps> = ({
+  onRoomJoined,
+  onRoomLeft,
+}) => {
   // State to track which mode we're in
   const [mode, setMode] = useState<RoomMode>("selection")
 
@@ -16,10 +19,10 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
 
   // State for the input field when joining a room
   const [joinRoomInput, setJoinRoomInput] = useState<string>("")
-  
+
   // State for error message when joining a room
   const [joinError, setJoinError] = useState<string>("")
-  
+
   // State for success message when a room is created or joined
   const [successMessage, setSuccessMessage] = useState<string>("")
 
@@ -30,10 +33,10 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
     setRoomName(generatedRoomName)
     setMode("active")
     setSuccessMessage(`Room ${generatedRoomName} created successfully!`)
-    
+
     // Hide success message after 3 seconds
     setTimeout(() => setSuccessMessage(""), 3000)
-    
+
     if (onRoomJoined) onRoomJoined(generatedRoomName)
   }
 
@@ -46,12 +49,12 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
   // Function to format room code (e.g., add 'Room-' prefix if missing)
   const formatRoomCode = (code: string): string => {
     code = code.trim()
-    
+
     // If code doesn't start with "Room-", add it
     if (!code.toLowerCase().startsWith("room-")) {
       code = `Room-${code}`
     }
-    
+
     // Capitalize the 'R' in 'Room'
     return code.charAt(0).toUpperCase() + code.slice(1)
   }
@@ -62,23 +65,23 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
       setJoinError("Please enter a room code")
       return
     }
-    
+
     if (!validateRoomCode(joinRoomInput)) {
       setJoinError("Invalid room code format")
       return
     }
-    
+
     // Format the room code
     const formattedRoomCode = formatRoomCode(joinRoomInput)
-    
+
     setJoinError("")
     setRoomName(formattedRoomCode)
     setMode("active")
     setSuccessMessage(`Joined room ${formattedRoomCode} successfully!`)
-    
+
     // Hide success message after 3 seconds
     setTimeout(() => setSuccessMessage(""), 3000)
-    
+
     if (onRoomJoined) onRoomJoined(formattedRoomCode)
   }
 
@@ -88,7 +91,7 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
     setRoomName("")
     setJoinRoomInput("")
     setJoinError("")
-    
+
     // Call the onRoomLeft callback to inform parent component
     if (onRoomLeft) onRoomLeft()
   }
@@ -144,13 +147,13 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
         return (
           <div className="flex flex-col gap-3">
             <p className="text-md">Enter a room code to join.</p>
-            
+
             {joinError && (
               <div className="bg-red-100 border-2 border-black rounded-lg px-3 py-2 text-sm text-red-700">
                 {joinError}
               </div>
             )}
-            
+
             <input
               type="text"
               className={`border-2 ${
@@ -159,8 +162,8 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
               placeholder="Enter room code"
               value={joinRoomInput}
               onChange={(e) => {
-                setJoinRoomInput(e.target.value);
-                if (joinError) setJoinError("");
+                setJoinRoomInput(e.target.value)
+                if (joinError) setJoinError("")
               }}
               onKeyDown={(e) => e.key === "Enter" && handleJoinRoom()}
             />
@@ -176,9 +179,9 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
             <button
               className="text-sm underline mt-2"
               onClick={() => {
-                setMode("selection");
-                setJoinRoomInput("");
-                setJoinError("");
+                setMode("selection")
+                setJoinRoomInput("")
+                setJoinError("")
               }}
             >
               ← Back
@@ -194,7 +197,7 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
                 {successMessage}
               </div>
             )}
-            
+
             <div
               className="font-bold text-xl mb-3 flex items-center justify-between"
               title={roomName}
@@ -203,9 +206,9 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
               <button
                 className="border-2 border-black rounded-full w-8 h-8 flex items-center justify-center bg-white hover:bg-gray-100 active:translate-y-[1px] shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
                 onClick={() => {
-                  navigator.clipboard?.writeText(roomName);
-                  setSuccessMessage("Room code copied to clipboard!");
-                  setTimeout(() => setSuccessMessage(""), 3000);
+                  navigator.clipboard?.writeText(roomName)
+                  setSuccessMessage("Room code copied to clipboard!")
+                  setTimeout(() => setSuccessMessage(""), 3000)
                 }}
                 title="Copy Room Code"
               >
@@ -221,12 +224,14 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) =
                 </svg>
               </button>
             </div>
-            
+
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-600">Room active - waiting for players</span>
+              <span className="text-sm text-gray-600">
+                Room active - waiting for players
+              </span>
             </div>
-            
+
             <div className="mt-1">
               <button
                 className="text-sm underline text-red-600 hover:text-red-800"
