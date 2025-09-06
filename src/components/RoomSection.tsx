@@ -1,38 +1,97 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 type RoomSectionProps = {
-  onRoomJoined?: (roomName: string) => void;
-};
+  onRoomJoined?: (roomName: string) => void
+  onRoomLeft?: () => void
+}
 
-type RoomMode = "selection" | "create" | "join" | "active";
+type RoomMode = "selection" | "create" | "join" | "active"
 
-const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
+const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined, onRoomLeft }) => {
   // State to track which mode we're in
-  const [mode, setMode] = useState<RoomMode>("selection");
-  
+  const [mode, setMode] = useState<RoomMode>("selection")
+
   // State for room name (either created or joined)
-  const [roomName, setRoomName] = useState<string>("");
-  
+  const [roomName, setRoomName] = useState<string>("")
+
   // State for the input field when joining a room
-  const [joinRoomInput, setJoinRoomInput] = useState<string>("");
+  const [joinRoomInput, setJoinRoomInput] = useState<string>("")
+  
+  // State for error message when joining a room
+  const [joinError, setJoinError] = useState<string>("")
+  
+  // State for success message when a room is created or joined
+  const [successMessage, setSuccessMessage] = useState<string>("")
 
   // Function to handle room creation
   const handleCreateRoom = () => {
     // Generate a random room code
-    const generatedRoomName = `Room-${Math.floor(1000 + Math.random() * 9000)}`;
-    setRoomName(generatedRoomName);
-    setMode("active");
-    if (onRoomJoined) onRoomJoined(generatedRoomName);
-  };
+    const generatedRoomName = `Room-${Math.floor(1000 + Math.random() * 9000)}`
+    setRoomName(generatedRoomName)
+    setMode("active")
+    setSuccessMessage(`Room ${generatedRoomName} created successfully!`)
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => setSuccessMessage(""), 3000)
+    
+    if (onRoomJoined) onRoomJoined(generatedRoomName)
+  }
+
+  // Function to validate room code
+  const validateRoomCode = (code: string): boolean => {
+    // Simple validation - can be expanded as needed
+    return code.trim().length >= 4
+  }
+
+  // Function to format room code (e.g., add 'Room-' prefix if missing)
+  const formatRoomCode = (code: string): string => {
+    code = code.trim()
+    
+    // If code doesn't start with "Room-", add it
+    if (!code.toLowerCase().startsWith("room-")) {
+      code = `Room-${code}`
+    }
+    
+    // Capitalize the 'R' in 'Room'
+    return code.charAt(0).toUpperCase() + code.slice(1)
+  }
 
   // Function to handle room joining
   const handleJoinRoom = () => {
-    if (joinRoomInput.trim()) {
-      setRoomName(joinRoomInput);
-      setMode("active");
-      if (onRoomJoined) onRoomJoined(joinRoomInput);
+    if (!joinRoomInput.trim()) {
+      setJoinError("Please enter a room code")
+      return
     }
-  };
+    
+    if (!validateRoomCode(joinRoomInput)) {
+      setJoinError("Invalid room code format")
+      return
+    }
+    
+    // Format the room code
+    const formattedRoomCode = formatRoomCode(joinRoomInput)
+    
+    setJoinError("")
+    setRoomName(formattedRoomCode)
+    setMode("active")
+    setSuccessMessage(`Joined room ${formattedRoomCode} successfully!`)
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => setSuccessMessage(""), 3000)
+    
+    if (onRoomJoined) onRoomJoined(formattedRoomCode)
+  }
+
+  // Function to handle leaving a room
+  const handleLeaveRoom = () => {
+    setMode("selection")
+    setRoomName("")
+    setJoinRoomInput("")
+    setJoinError("")
+    
+    // Call the onRoomLeft callback to inform parent component
+    if (onRoomLeft) onRoomLeft()
+  }
 
   // Render based on the current mode
   const renderContent = () => {
@@ -40,6 +99,11 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
       case "selection":
         return (
           <div className="flex flex-col gap-4">
+            {successMessage && (
+              <div className="bg-green-100 border-2 border-black rounded-lg px-3 py-2 mb-2 text-sm">
+                {successMessage}
+              </div>
+            )}
             <button
               className="border-2 border-black rounded-xl px-5 py-3 font-bold text-lg bg-white hover:bg-gray-100 active:translate-y-[1px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               onClick={() => setMode("create")}
@@ -53,12 +117,14 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
               Join Room
             </button>
           </div>
-        );
+        )
 
       case "create":
         return (
           <div className="flex flex-col gap-3">
-            <p className="text-md">Create a new room and share the code with friends.</p>
+            <p className="text-md">
+              Create a new room and share the code with friends.
+            </p>
             <button
               className="border-2 border-black rounded-xl px-5 py-3 font-bold text-lg bg-green-200 hover:bg-green-300 active:translate-y-[1px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               onClick={handleCreateRoom}
@@ -72,39 +138,63 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
               ← Back
             </button>
           </div>
-        );
+        )
 
       case "join":
         return (
           <div className="flex flex-col gap-3">
             <p className="text-md">Enter a room code to join.</p>
+            
+            {joinError && (
+              <div className="bg-red-100 border-2 border-black rounded-lg px-3 py-2 text-sm text-red-700">
+                {joinError}
+              </div>
+            )}
+            
             <input
               type="text"
-              className="border-2 border-black rounded-lg px-4 py-2 font-medium shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+              className={`border-2 ${
+                joinError ? "border-red-500" : "border-black"
+              } rounded-lg px-4 py-2 font-medium shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}
               placeholder="Enter room code"
               value={joinRoomInput}
-              onChange={(e) => setJoinRoomInput(e.target.value)}
+              onChange={(e) => {
+                setJoinRoomInput(e.target.value);
+                if (joinError) setJoinError("");
+              }}
               onKeyDown={(e) => e.key === "Enter" && handleJoinRoom()}
             />
+            <div className="text-xs text-gray-600 ml-1">
+              Example: Room-1234 or just 1234
+            </div>
             <button
               className="border-2 border-black rounded-xl px-5 py-2 font-bold text-lg bg-blue-200 hover:bg-blue-300 active:translate-y-[1px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               onClick={handleJoinRoom}
-              disabled={!joinRoomInput.trim()}
             >
               Join Room
             </button>
             <button
               className="text-sm underline mt-2"
-              onClick={() => setMode("selection")}
+              onClick={() => {
+                setMode("selection");
+                setJoinRoomInput("");
+                setJoinError("");
+              }}
             >
               ← Back
             </button>
           </div>
-        );
+        )
 
       case "active":
         return (
           <>
+            {successMessage && (
+              <div className="bg-green-100 border-2 border-black rounded-lg px-3 py-2 mb-3 text-sm">
+                {successMessage}
+              </div>
+            )}
+            
             <div
               className="font-bold text-xl mb-3 flex items-center justify-between"
               title={roomName}
@@ -112,7 +202,11 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
               <span>{roomName}</span>
               <button
                 className="border-2 border-black rounded-full w-8 h-8 flex items-center justify-center bg-white hover:bg-gray-100 active:translate-y-[1px] shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
-                onClick={() => navigator.clipboard?.writeText(roomName)}
+                onClick={() => {
+                  navigator.clipboard?.writeText(roomName);
+                  setSuccessMessage("Room code copied to clipboard!");
+                  setTimeout(() => setSuccessMessage(""), 3000);
+                }}
                 title="Copy Room Code"
               >
                 <svg
@@ -127,22 +221,24 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
                 </svg>
               </button>
             </div>
+            
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-600">Room active - waiting for players</span>
+            </div>
+            
             <div className="mt-1">
               <button
-                className="text-sm underline"
-                onClick={() => {
-                  setMode("selection");
-                  setRoomName("");
-                  setJoinRoomInput("");
-                }}
+                className="text-sm underline text-red-600 hover:text-red-800"
+                onClick={handleLeaveRoom}
               >
                 Leave Room
               </button>
             </div>
           </>
-        );
+        )
     }
-  };
+  }
 
   return (
     <div className="border-2 border-black rounded-2xl p-5 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
@@ -173,7 +269,7 @@ const RoomSection: React.FC<RoomSectionProps> = ({ onRoomJoined }) => {
       </div>
       {renderContent()}
     </div>
-  );
-};
+  )
+}
 
-export default RoomSection;
+export default RoomSection
