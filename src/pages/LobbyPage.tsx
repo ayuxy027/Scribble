@@ -161,7 +161,10 @@ const LobbyPage: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <div className="font-bold text-xl mb-3 flex items-center justify-between" title={roomName}>
+              <div
+                className="font-bold text-xl mb-3 flex items-center justify-between"
+                title={roomName}
+              >
                 <span>{roomName}</span>
                 <button
                   className="border-2 border-black rounded-full w-8 h-8 flex items-center justify-center bg-white hover:bg-gray-100 active:translate-y-[1px] shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
@@ -210,16 +213,18 @@ const LobbyPage: React.FC = () => {
                     </svg>
                   </div>
                 </div>
-                
+
                 {/* Chat Interface - Coming Soon */}
                 <div className="h-[160px] border-2 border-black rounded-lg bg-gray-50 mb-3 overflow-hidden relative">
                   {/* Coming Soon Overlay */}
                   <div className="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-[1px] flex items-center justify-center z-10">
                     <div className="bg-white border-2 border-black px-6 py-3 rounded-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] rotate-[-5deg]">
-                      <div className="text-2xl font-black tracking-wide">COMING SOON</div>
+                      <div className="text-2xl font-black tracking-wide">
+                        COMING SOON
+                      </div>
                     </div>
                   </div>
-                  
+
                   {/* Sample Chat Messages (Visible behind the overlay) */}
                   <div className="p-3 h-full flex flex-col">
                     <div className="flex mb-2">
@@ -248,23 +253,31 @@ const LobbyPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Message Input Field (Disabled) */}
                 <div className="relative mb-3">
-                  <input 
-                    type="text" 
-                    className="w-full border-2 border-black rounded-full px-4 py-2 pr-10 text-sm bg-gray-100 cursor-not-allowed" 
-                    placeholder="Type a message..." 
-                    disabled 
+                  <input
+                    type="text"
+                    className="w-full border-2 border-black rounded-full px-4 py-2 pr-10 text-sm bg-gray-100 cursor-not-allowed"
+                    placeholder="Type a message..."
+                    disabled
                   />
                   <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 border border-black rounded-full w-7 h-7 flex items-center justify-center cursor-not-allowed">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.644C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.644C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
                     </svg>
                   </button>
                 </div>
-                
-                <div className="text-sm mb-2">Toggle when you're ready to play.</div>
+
+                <div className="text-sm mb-2">
+                  Toggle when you're ready to play.
+                </div>
               </div>
               <button
                 className={`mt-1 border-2 border-black rounded-full px-5 py-2 font-bold text-lg uppercase tracking-wide transition-colors ${
