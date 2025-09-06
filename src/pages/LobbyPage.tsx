@@ -3,6 +3,7 @@ import Navigation from "../components/Navigation"
 import PlayerList, { type Player } from "../components/PlayerList"
 import Avatar from "../components/Avatar"
 import RoomSection from "../components/RoomSection"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 
 const LobbyPage: React.FC = () => {
   // Demo local state; replace with actual state/store later
@@ -46,8 +47,6 @@ const LobbyPage: React.FC = () => {
       <div className="absolute right-[15%] top-[25%] w-16 h-12 bg-gray-200 border-2 border-black rounded-full -rotate-6 z-10"></div>
 
       <div className="absolute left-[25%] bottom-[15%] w-12 h-12 bg-pink-100 border-2 border-black rounded-full rotate-12 z-10"></div>
-
-      <div className="absolute right-[20%] bottom-[20%] w-20 h-14 bg-blue-100 border-2 border-black rounded-full -rotate-12 z-10"></div>
 
       {/* Content */}
       <div className="flex flex-col items-center min-h-screen px-6 md:px-10 relative z-20 pt-16 pb-12">
@@ -144,16 +143,11 @@ const LobbyPage: React.FC = () => {
                     Create a new room or join an existing one to get started.
                   </p>
                 </div>
-                <div className="w-1/2 mb-4">
-                  <img
-                    src="/src/assets/banner.png"
-                    alt="Scribble"
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-lg font-medium">
-                  Select "Create Room" or "Join Room" from the sidebar →
-                </p>
+                <DotLottieReact
+                  src="https://lottie.host/5ff0e457-00c7-4d48-8042-4d946e23ba9f/ce3WNv2292.lottie"
+                  loop
+                  autoplay
+                />
               </div>
             )}
           </div>
@@ -161,16 +155,16 @@ const LobbyPage: React.FC = () => {
           {/* Right Column: Room + Status */}
           <div className="lg:col-span-4 flex flex-col gap-6 lg:max-h-[calc(100vh-12rem)]">
             {/* Room Section */}
-            <RoomSection 
-              onRoomJoined={setRoomName} 
-              onRoomLeft={() => setRoomName("")} 
+            <RoomSection
+              onRoomJoined={setRoomName}
+              onRoomLeft={() => setRoomName("")}
             />
 
             {/* Status */}
             {roomName && (
               <div className="border-2 border-black rounded-2xl p-5 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col min-h-[350px]">
-                <div className="flex-1">
-                  <div className="text-lg font-black mb-3 relative">
+                <div className="flex-1 flex flex-col h-full">
+                  <div className="text-lg font-black mb-3 relative flex-shrink-0">
                     Chat
                     <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
                       <svg
@@ -197,7 +191,7 @@ const LobbyPage: React.FC = () => {
                   </div>
 
                   {/* Chat Interface - Coming Soon */}
-                  <div className="h-[160px] border-2 border-black rounded-lg bg-gray-50 mb-3 overflow-hidden relative">
+                  <div className="h-[160px] border-2 border-black rounded-lg bg-gray-50 mb-3 overflow-hidden relative flex-shrink-0">
                     {/* Coming Soon Overlay */}
                     <div className="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-[1px] flex items-center justify-center z-10">
                       <div className="bg-white border-2 border-black px-6 py-3 rounded-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] rotate-[-5deg]">
@@ -237,7 +231,7 @@ const LobbyPage: React.FC = () => {
                   </div>
 
                   {/* Message Input Field (Disabled) */}
-                  <div className="relative mb-3">
+                  <div className="relative mb-4 flex-shrink-0">
                     <input
                       type="text"
                       className="w-full border-2 border-black rounded-full px-4 py-2 pr-10 text-sm bg-gray-100 cursor-not-allowed"
@@ -257,44 +251,34 @@ const LobbyPage: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="mt-5">
+                  <div className="mt-auto mb-2 flex-shrink-0">
                     <h3 className="text-center text-sm uppercase font-bold tracking-wide text-gray-600 mb-2">
                       Game Status
                     </h3>
                     <button
-                      className={`border-2 border-black rounded-xl px-6 py-3 font-bold text-lg uppercase tracking-wide transition-all ${
-                        meReady 
-                          ? "bg-green-300 hover:bg-green-400" 
+                      className={`border-2 border-black rounded-xl px-5 py-2 font-bold text-lg uppercase tracking-wide transition-all ${
+                        meReady
+                          ? "bg-green-300 hover:bg-green-400"
                           : "bg-gray-200 hover:bg-gray-300"
-                      } active:translate-y-[2px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] w-full max-w-xs flex items-center justify-center gap-2 mx-auto`}
+                      } active:translate-y-[2px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] w-full max-w-xs flex items-center justify-center gap-2 mx-auto`}
                       onClick={() => setMeReady((v) => !v)}
                     >
                       {meReady ? (
                         <>
-                          <svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="20" 
-                            height="20" 
-                            fill="currentColor" 
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
                             viewBox="0 0 16 16"
                             className="text-green-800"
                           >
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                           </svg>
                           <span>Ready</span>
                         </>
                       ) : (
                         <>
-                          <svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="20" 
-                            height="20" 
-                            fill="currentColor" 
-                            viewBox="0 0 16 16"
-                            className="text-gray-600"
-                          >
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                          </svg>
                           <span>Not Ready</span>
                         </>
                       )}
