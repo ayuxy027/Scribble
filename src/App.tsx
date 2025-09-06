@@ -1,8 +1,16 @@
-import React from "react"
-import LandingPage from "./pages/LandingPage"
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import LobbyPage from './pages/LobbyPage';
 
 const App: React.FC = () => {
-  return <LandingPage />
-}
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/lobby" element={<LobbyPage />} />
+      <Route path="*" element={<LandingPage />} />
+    </Routes>
+  );
+};
 
 export default App
