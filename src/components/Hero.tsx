@@ -13,7 +13,7 @@ const Hero = () => {
 
                     {/* Main welcome text */}
                     <div className="text-center max-w-4xl">
-                        <h1 className="text-6xl md:text-8xl font-black leading-none">
+                        <h1 className="text-6xl md:text-8xl font-thin leading-none" style={{ fontFamily: 'Bungee, cursive' }}>
                             <div className="block">STEP INTO THE</div>
                             <div className="block my-4">
                                 <span>D</span>
