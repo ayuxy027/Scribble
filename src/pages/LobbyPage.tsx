@@ -30,7 +30,7 @@ const LobbyPage: React.FC = () => {
   )
 
   return (
-    <div className="h-screen bg-[#f5f3ea] relative overflow-hidden">
+    <div className="min-h-screen bg-[#f5f3ea] relative overflow-y-auto overflow-x-hidden">
       <Navigation />
 
       {/* Decorative Elements */}
@@ -50,7 +50,7 @@ const LobbyPage: React.FC = () => {
       <div className="absolute right-[20%] bottom-[20%] w-20 h-14 bg-blue-100 border-2 border-black rounded-full -rotate-12 z-10"></div>
 
       {/* Content */}
-      <div className="flex flex-col items-center h-screen px-6 md:px-10 relative z-20 pt-16 pb-6">
+      <div className="flex flex-col items-center min-h-screen px-6 md:px-10 relative z-20 pt-16 pb-12">
         {/* Heading */}
         <div className="w-full max-w-5xl mb-4">
           <h1 className="text-5xl md:text-7xl font-black leading-tight">
@@ -59,9 +59,9 @@ const LobbyPage: React.FC = () => {
         </div>
 
         {/* Main Grid Container - Flex with Fixed Height */}
-        <div className="w-full max-w-5xl flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-hidden">
+        <div className="w-full max-w-5xl flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-min">
           {/* Left Column: Host + Players */}
-          <div className="lg:col-span-8 flex flex-col gap-6 h-full overflow-hidden">
+          <div className="lg:col-span-8 flex flex-col gap-6 lg:max-h-[calc(100vh-12rem)]">
             {roomName ? (
               <>
                 {/* Host */}
@@ -103,7 +103,7 @@ const LobbyPage: React.FC = () => {
                 </div>
 
                 {/* Players */}
-                <div className="border-2 border-black rounded-2xl p-0 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 flex flex-col overflow-hidden">
+                <div className="border-2 border-black rounded-2xl p-0 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col min-h-[350px] max-h-[60vh]">
                   <div className="text-lg font-black px-5 py-4 flex-shrink-0 bg-white sticky top-0 z-10">
                     Players
                     <div className="absolute bottom-0 left-0 right-0 h-[6px] overflow-hidden">
@@ -135,7 +135,7 @@ const LobbyPage: React.FC = () => {
                 </div>
               </>
             ) : (
-              <div className="border-2 border-black rounded-2xl p-8 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 flex flex-col items-center justify-center">
+              <div className="border-2 border-black rounded-2xl p-8 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center min-h-[70vh] lg:min-h-[550px]">
                 <div className="text-center mb-8">
                   <h2 className="text-3xl font-black mb-4">
                     Welcome to Scribble!
@@ -159,7 +159,7 @@ const LobbyPage: React.FC = () => {
           </div>
 
           {/* Right Column: Room + Status */}
-          <div className="lg:col-span-4 flex flex-col gap-6 h-full">
+          <div className="lg:col-span-4 flex flex-col gap-6 lg:max-h-[calc(100vh-12rem)]">
             {/* Room Section */}
             <RoomSection 
               onRoomJoined={setRoomName} 
@@ -168,7 +168,7 @@ const LobbyPage: React.FC = () => {
 
             {/* Status */}
             {roomName && (
-              <div className="border-2 border-black rounded-2xl p-5 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col flex-1">
+              <div className="border-2 border-black rounded-2xl p-5 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col min-h-[350px]">
                 <div className="flex-1">
                   <div className="text-lg font-black mb-3 relative">
                     Chat
@@ -257,18 +257,50 @@ const LobbyPage: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="text-sm mb-2">
-                    Toggle when you're ready to play.
+                  <div className="mt-5">
+                    <h3 className="text-center text-sm uppercase font-bold tracking-wide text-gray-600 mb-2">
+                      Game Status
+                    </h3>
+                    <button
+                      className={`border-2 border-black rounded-xl px-6 py-3 font-bold text-lg uppercase tracking-wide transition-all ${
+                        meReady 
+                          ? "bg-green-300 hover:bg-green-400" 
+                          : "bg-gray-200 hover:bg-gray-300"
+                      } active:translate-y-[2px] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] w-full max-w-xs flex items-center justify-center gap-2 mx-auto`}
+                      onClick={() => setMeReady((v) => !v)}
+                    >
+                      {meReady ? (
+                        <>
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="20" 
+                            height="20" 
+                            fill="currentColor" 
+                            viewBox="0 0 16 16"
+                            className="text-green-800"
+                          >
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                          </svg>
+                          <span>Ready</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="20" 
+                            height="20" 
+                            fill="currentColor" 
+                            viewBox="0 0 16 16"
+                            className="text-gray-600"
+                          >
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                          </svg>
+                          <span>Not Ready</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
-                <button
-                  className={`mt-1 border-2 border-black rounded-full px-5 py-2 font-bold text-lg uppercase tracking-wide transition-colors ${
-                    meReady ? "bg-green-300" : "bg-gray-300"
-                  } hover:brightness-95 active:translate-y-[1px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-full`}
-                  onClick={() => setMeReady((v) => !v)}
-                >
-                  {meReady ? "Ready" : "Not Ready"}
-                </button>
               </div>
             )}
           </div>
