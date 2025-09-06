@@ -8,7 +8,7 @@ const LobbyPage: React.FC = () => {
   // Demo local state; replace with actual state/store later
   const [meReady, setMeReady] = useState(false)
   const [roomName, setRoomName] = useState<string>("")
-  
+
   const hostName = "Alex Johnson"
 
   const players: Player[] = useMemo(
@@ -137,13 +137,23 @@ const LobbyPage: React.FC = () => {
             ) : (
               <div className="border-2 border-black rounded-2xl p-8 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-1 flex flex-col items-center justify-center">
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-black mb-4">Welcome to Scribble!</h2>
-                  <p className="text-lg">Create a new room or join an existing one to get started.</p>
+                  <h2 className="text-3xl font-black mb-4">
+                    Welcome to Scribble!
+                  </h2>
+                  <p className="text-lg">
+                    Create a new room or join an existing one to get started.
+                  </p>
                 </div>
                 <div className="w-1/2 mb-4">
-                  <img src="/src/assets/banner.png" alt="Scribble" className="w-full h-auto" />
+                  <img
+                    src="/src/assets/banner.png"
+                    alt="Scribble"
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="text-lg font-medium">Select "Create Room" or "Join Room" from the sidebar →</p>
+                <p className="text-lg font-medium">
+                  Select "Create Room" or "Join Room" from the sidebar →
+                </p>
               </div>
             )}
           </div>
@@ -151,7 +161,10 @@ const LobbyPage: React.FC = () => {
           {/* Right Column: Room + Status */}
           <div className="lg:col-span-4 flex flex-col gap-6 h-full">
             {/* Room Section */}
-            <RoomSection onRoomJoined={setRoomName} />
+            <RoomSection 
+              onRoomJoined={setRoomName} 
+              onRoomLeft={() => setRoomName("")} 
+            />
 
             {/* Status */}
             {roomName && (
