@@ -1,0 +1,12 @@
+{
+  "name": "Scribble - Web3 Drawing Game",
+  "start_url": "/",
+  "description": "Join the ultimate web3 doodle battle where creativity meets crypto. Draw, compete, and earn rewards on the blockchain!",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
