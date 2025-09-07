@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
-import type { ServerToClientEvents, ClientToServerEvents } from '../App';
+import type { ServerToClientEvents, ClientToServerEvents } from '../GamePage';
 
 interface CanvasProps {
     socket: Socket<ServerToClientEvents, ClientToServerEvents>;
@@ -294,12 +294,12 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
         <div className="w-full h-full flex flex-col">
             {/* Drawing controls - only visible to the drawer */}
             {isDrawer && (
-                <div className="flex-shrink-0 p-4 bg-gray-900 rounded-lg mb-4">
+                <div className="flex-shrink-0 p-4 bg-white border-2 border-black rounded-2xl mb-4">
                     {/* Tools & Actions */}
                     <div className="flex flex-wrap items-center gap-4">
                         {/* Tools */}
                         <div className="flex items-center gap-2">
-                            <span className="text-white text-sm font-semibold">Tools:</span>
+                            <span className="text-black text-sm font-bold uppercase">Tools:</span>
                             {/*
                                 Revised tool selection buttons for simplicity
                                 - Unified button styles
@@ -309,7 +309,7 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
                                 <button
                                     key={t}
                                     onClick={() => setTool(t as Tool)}
-                                    className={`px-3 py-2 rounded text-sm flex items-center gap-1 transition-colors ${tool === t ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
+                                    className={`px-3 py-2 rounded-full text-sm flex items-center gap-1 transition-colors border-2 font-bold uppercase ${tool === t ? 'bg-black text-white border-black' : 'bg-white text-black border-black hover:bg-gray-100'}`}
                                 >
                                     {t === 'draw' && '✏️'}
                                     {t === 'erase' && '🧽'}
@@ -321,11 +321,11 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
                         
                         {/* Undo/Redo */}
                         <div className="flex items-center gap-2">
-                            <button onClick={handleUndo} disabled={history.length === 0} className="px-3 py-2 bg-gray-700 text-gray-300 rounded text-sm hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1">
+                            <button onClick={handleUndo} disabled={history.length === 0} className="px-3 py-2 bg-white border-2 border-black text-black rounded-full text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 font-bold uppercase">
                                 <span>↩️</span>
                                 <span className="hidden sm:inline">Undo</span>
                             </button>
-                            <button onClick={handleRedo} disabled={redoStack.length === 0} className="px-3 py-2 bg-gray-700 text-gray-300 rounded text-sm hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1">
+                            <button onClick={handleRedo} disabled={redoStack.length === 0} className="px-3 py-2 bg-white border-2 border-black text-black rounded-full text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 font-bold uppercase">
                                 <span>Redo ↪️</span>
                             </button>
                         </div>
@@ -334,23 +334,23 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
                         <div className="relative">
                             <button
                                 onClick={() => setShowColorPicker(!showColorPicker)}
-                                className="w-10 h-10 rounded-full border-2 border-gray-600"
+                                className="w-10 h-10 rounded-full border-2 border-black"
                                 style={{ backgroundColor: color }}
                             />
                             {showColorPicker && (
-                                <div className="absolute top-12 left-0 bg-gray-800 p-3 rounded-lg shadow-lg z-10">
+                                <div className="absolute top-12 left-0 bg-white border-2 border-black p-3 rounded-2xl shadow-lg z-10">
                                     <input
                                         type="color"
                                         value={color}
                                         onChange={(e) => setColor(e.target.value)}
-                                        className="w-20 h-8 rounded border-none cursor-pointer"
+                                        className="w-20 h-8 rounded border-2 border-black cursor-pointer"
                                     />
                                     <div className="mt-2 grid grid-cols-5 gap-1">
                                         {['#FFFFFF', '#000000', '#EF4444', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981'].map(c => (
                                             <button
                                                 key={c}
                                                 onClick={() => {setColor(c); setShowColorPicker(false);}}
-                                                className="w-6 h-6 rounded border border-gray-600"
+                                                className="w-6 h-6 rounded border-2 border-black"
                                                 style={{ backgroundColor: c }}
                                             />
                                         ))}
@@ -361,19 +361,19 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
 
                         {/* Brush Size */}
                         <div className="flex items-center gap-2">
-                            <span className="text-white text-sm">Size:</span>
+                            <span className="text-black text-sm font-bold uppercase">Size:</span>
                             <input
                                 type="range" min="1" max="50" value={brushSize}
                                 onChange={(e) => setBrushSize(Number(e.target.value))}
                                 className="w-24"
                             />
-                            <span className="text-white text-sm w-8 text-center">{brushSize}</span>
+                            <span className="text-black text-sm w-8 text-center font-bold">{brushSize}</span>
                         </div>
 
                         {/* Clear Button */}
                         <button 
                             onClick={handleClearCanvas}
-                            className="px-4 py-2 bg-red-600 rounded text-sm hover:bg-red-700 text-white flex items-center gap-2"
+                            className="px-4 py-2 bg-red-600 border-2 border-red-600 rounded-full text-sm hover:bg-red-700 text-white flex items-center gap-2 font-bold uppercase"
                         >
                             🗑️ Clear All
                         </button>
@@ -392,7 +392,7 @@ const Canvas: React.FC<CanvasProps> = ({ socket, roomId, isDrawer }) => {
                     onTouchStart={startDrawing}
                     onTouchMove={draw}
                     onTouchEnd={stopDrawing}
-                    className="absolute inset-0 bg-gray-600 rounded-lg w-full h-full cursor-crosshair"
+                    className="absolute inset-0 bg-white border-2 border-black rounded-2xl w-full h-full cursor-crosshair"
                 />
                 {/* Preview Canvas for line tool */}
                 <canvas

@@ -54,6 +54,7 @@ export interface ClientToServerEvents {
   "send-message": (data: { roomId: string, message: string }) => void;
   "clear-canvas": (roomId: string) => void;
   "canvas-state-update": (data: { roomId: string, history: any[][] }) => void;
+  "reconnect-room": (roomId: string, username: string) => void;
 }
 
 const SERVER_URL = "http://localhost:4000";
@@ -344,9 +345,11 @@ const App: React.FC = () => {
   if (gameState === "game-over") {
     const isHost = socketRef.current?.id === room.hostId;
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-4">
-        <div className="bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl p-8 max-w-md w-full">
-          <h1 className="text-4xl font-bold text-center mb-8 text-blue-400">Game Over!</h1>
+      <div className="flex items-center justify-center min-h-screen bg-white p-4">
+        <div className="bg-white border-2 border-black rounded-2xl shadow-2xl p-8 max-w-md w-full">
+          <div className="bg-black text-white px-6 py-3 rounded-full mb-8 text-center">
+            <h1 className="text-3xl font-bold uppercase">Game Over!</h1>
+          </div>
           <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold text-gray-200 text-center mb-4">Final Scores</h2>
             {finalScores.map((player, index) => (
@@ -487,18 +490,19 @@ const App: React.FC = () => {
   const isHost = socketRef.current?.id === room.hostId;
 
   return (
-    <div className="flex flex-col h-screen p-4 gap-4 max-w-7xl mx-auto bg-gradient-to-br from-gray-900 to-gray-800">
+    <div className="flex flex-col h-screen p-4 gap-4 max-w-7xl mx-auto bg-white">
       <header className="flex justify-between items-center mb-2">
-        <h1 className="text-3xl font-extrabold text-blue-400 drop-shadow-lg tracking-wide">
-          ScribbleChain
-        </h1>
+        <div className="bg-black text-white px-4 py-2 rounded-full relative">
+          <h1 className="text-2xl font-bold">STAKEBOARD</h1>
+          <div className="absolute -bottom-2 left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black"></div>
+        </div>
         <div>
-          <span className="mr-4 text-gray-200">
-            Room: <strong className="text-yellow-400">{room.roomId}</strong>
+          <span className="mr-4 text-black font-bold">
+            Room: <strong className="text-red-600">{room.roomId}</strong>
           </span>
           <button
             onClick={handleLeaveRoom}
-            className="px-4 py-2 bg-red-600 rounded-lg hover:bg-red-700 text-sm text-white font-semibold transition"
+            className="px-4 py-2 bg-red-600 border-2 border-red-600 rounded-full hover:bg-red-700 text-sm text-white font-bold uppercase transition"
           >
             Leave Room
           </button>
@@ -545,12 +549,12 @@ const App: React.FC = () => {
             </div>
           )}
 
-          <div className="flex-1 relative bg-gray-900 rounded-2xl border border-gray-800 shadow-lg">
+          <div className="flex-1 relative bg-white border-2 border-black rounded-2xl shadow-lg">
             {/* Word Choice Overlay */}
             {roundPhase === "choose-word" && isDrawer && wordOptions.length > 0 && (
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 rounded-2xl z-10">
-                <div className="bg-gray-800 p-6 rounded-xl">
-                  <h3 className="text-xl font-bold text-white mb-4">
+                <div className="bg-white border-2 border-black p-6 rounded-2xl">
+                  <h3 className="text-xl font-bold text-black mb-4 uppercase">
                     Choose a word to draw:
                   </h3>
                   <div className="flex gap-4">
@@ -558,7 +562,7 @@ const App: React.FC = () => {
                       <button
                         key={index}
                         onClick={() => handleWordChoice(word)}
-                        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
+                        className="px-6 py-3 bg-black hover:bg-gray-800 text-white font-bold rounded-full transition uppercase"
                       >
                         {word}
                       </button>
@@ -571,21 +575,21 @@ const App: React.FC = () => {
             {/* Round Results Overlay */}
             {roundPhase === "results" && (
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 rounded-2xl z-10">
-                <div className="bg-gray-800 p-6 rounded-xl max-w-md w-full">
-                  <h3 className="text-xl font-bold text-white mb-4">
+                <div className="bg-white border-2 border-black p-6 rounded-2xl max-w-md w-full">
+                  <h3 className="text-xl font-bold text-black mb-4 uppercase">
                     Round {roundInfo.round} Results
                   </h3>
-                  <p className="text-gray-300 mb-4">
-                    Word was: <strong className="text-yellow-400">{secretWord}</strong>
+                  <p className="text-black mb-4 font-bold">
+                    Word was: <strong className="text-red-600">{secretWord}</strong>
                   </p>
                   <div className="space-y-2">
                     {roundResults.map((result, index) => (
                       <div
                         key={index}
-                        className="flex justify-between items-center bg-gray-700 p-2 rounded"
+                        className="flex justify-between items-center bg-gray-100 border-2 border-gray-300 p-2 rounded-full"
                       >
-                        <span className="text-white">{result.username}</span>
-                        <span className="text-green-400">+{result.points} pts</span>
+                        <span className="text-black font-bold uppercase">{result.username}</span>
+                        <span className="text-green-600 font-bold">+{result.points} pts</span>
                       </div>
                     ))}
                   </div>
@@ -604,7 +608,7 @@ const App: React.FC = () => {
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-2xl">
                 <button
                   onClick={handleStartGame}
-                  className="px-10 py-5 text-2xl bg-green-600 rounded-xl hover:bg-green-700 text-white font-bold shadow-lg transition"
+                  className="px-10 py-5 text-2xl bg-black border-2 border-black rounded-full hover:bg-gray-800 text-white font-bold shadow-lg transition uppercase"
                 >
                   Start Game
                 </button>
