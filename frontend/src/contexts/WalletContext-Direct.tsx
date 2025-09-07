@@ -19,67 +19,57 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
   const connectWallet = async () => {
     console.log("Attempting to connect with Leather wallet...")
 
+    if (typeof (window as any).LeatherProvider === "undefined") {
+      alert("Leather wallet is not installed. Please install it and try again.")
+      console.error("Leather provider not found.")
+      return
+    }
+
     try {
-      // Method 1: Try using Leather's direct API if available
-      if ((window as any).LeatherProvider) {
-        console.log("Using Leather Provider directly...")
-        const provider = (window as any).LeatherProvider
+      console.log("Requesting addresses from Leather wallet...")
+      const resp = await (window as any).LeatherProvider.request("getAddresses")
 
-        const result = await provider.request({
-          method: "stx_requestAccounts",
-        })
+      console.log("Wallet response received:", resp)
 
-        if (result && result.addresses && result.addresses.length > 0) {
-          const address = result.addresses[0]
+      // The response contains a `result` object, which in turn contains the `addresses` array.
+      if (resp && resp.result && Array.isArray(resp.result.addresses)) {
+        const addresses = resp.result.addresses
+        console.log("Addresses found:", addresses)
+
+        // Find the Stacks address in the array
+        const stacksAddress = addresses.find(
+          (addr: any) => addr.type === "stacks"
+        )
+
+        if (stacksAddress && stacksAddress.address) {
+          console.log("Found STX address:", stacksAddress.address)
+          setUserAddress(stacksAddress.address)
           setIsAuthenticated(true)
-          setUserAddress(address)
-          console.log("Connected successfully with address:", address)
-          return
-        }
-      }
-
-      // Method 2: Try using window.btc if available (Leather also exposes this)
-      if ((window as any).btc) {
-        console.log("Using window.btc provider...")
-        const btc = (window as any).btc
-
-        const result = await btc.request("getAddresses")
-        if (result && result.addresses && result.addresses.length > 0) {
-          const stxAddress = result.addresses.find(
-            (addr: any) => addr.type === "stacks"
+        } else {
+          console.error(
+            "No STX address found in the wallet response.",
+            addresses
           )
-          if (stxAddress) {
-            setIsAuthenticated(true)
-            setUserAddress(stxAddress.address)
-            console.log(
-              "Connected successfully with STX address:",
-              stxAddress.address
-            )
-            return
-          }
+          alert(
+            "No Stacks address found in your wallet. Please make sure you have a Stacks account in your Leather wallet."
+          )
         }
+      } else {
+        console.error(
+          "Invalid response structure from wallet. Expected `result.addresses` array.",
+          resp
+        )
+        alert(
+          "Received an unexpected response from the wallet. Please check the console for details."
+        )
       }
-
-      // Method 3: Fallback - show instruction to user
-      alert(`
-        Please connect your Leather wallet manually:
-        1. Click on the Leather extension icon
-        2. Unlock your wallet if needed
-        3. Then try connecting again
-        
-        If this persists, make sure Leather wallet is installed and enabled.
-      `)
     } catch (error) {
-      console.error("Error connecting to Leather wallet:", error)
-      alert(`
-        Failed to connect to Leather wallet.
-        Error: ${error instanceof Error ? error.message : String(error)}
-        
-        Please make sure:
-        1. Leather wallet is installed
-        2. Leather wallet is unlocked
-        3. This site is allowed to connect to your wallet
-      `)
+      console.error("Failed to connect to Leather wallet.", error)
+      alert(
+        `Failed to connect to Leather wallet. Error: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      )
     }
   }
 
