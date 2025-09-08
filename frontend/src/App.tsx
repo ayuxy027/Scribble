@@ -1,8 +1,8 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import LobbyPage from './pages/LobbyPage';
-import GamePage from './pages/GamePage'
+import React from "react"
+import { Routes, Route } from "react-router-dom"
+import LandingPage from "./pages/LandingPage"
+import LobbyPage from "./pages/LobbyPage"
+import GamePage from "./pages/GamePage"
 
 const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Route path="/game" element={<GamePage />} />
       <Route path="*" element={<LandingPage />} />
     </Routes>
-  );
-};
+  )
+}
 
 export default App

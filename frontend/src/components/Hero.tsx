@@ -104,7 +104,7 @@ const Hero = () => {
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link
-                  to="/lobby"
+                  to="/game"
                   className="bg-black text-white px-10 py-5 rounded-full text-xl font-black hover:bg-gray-800 transition-colors relative inline-block text-center"
                 >
                   <span>LOBBY</span>
